@@ -18,6 +18,7 @@ public class TicTacToe
     public static final String X_MARKER = "X";
     public static final String O_MARKER = "O";
     public static final String BLANK = "-";
+    private TicTacToeViewer window;
 
     /** Winning Directions **/
     public static final int ROW_WIN = 1;
@@ -106,6 +107,8 @@ public class TicTacToe
         Scanner input = new Scanner(System.in);
 
         System.out.println("Welcome to Tic Tac Toe!");
+        this.window = new TicTacToeViewer(board);
+
 
         // Loop until there is a winner or no more turns
         while(!this.checkWin() && this.checkTurn()) {

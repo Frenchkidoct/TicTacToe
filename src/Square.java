@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+import java.awt.Color;
 /**
  * A class written to support the TicTacToe Game.
  *
@@ -16,6 +18,9 @@ public class Square {
     private int row;
     private int col;
     private boolean isWinningSquare;
+    private Color color;
+
+
 
     /**
      * Constructor to initialize one Square of the
@@ -57,5 +62,14 @@ public class Square {
      */
     public String toString() {
         return this.marker;
+    }
+    public void draw(Graphics g)
+    {
+        //view
+        //x image
+        //O image
+        //(x,y)
+        g.setColor(Color.RED);
+        g.fillRect(5,100,10,10);
     }
 }
