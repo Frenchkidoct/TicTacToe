@@ -1,5 +1,7 @@
-import java.awt.Graphics;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.ImageObserver;
+
 /**
  * A class written to support the TicTacToe Game.
  *
@@ -19,6 +21,10 @@ public class Square {
     private int col;
     private boolean isWinningSquare;
     private Color color;
+    private static final int sWidth = 125;
+    private static final int sLength = 125;
+    private Image imageX;
+    private Image imageO;
 
 
 
@@ -28,12 +34,16 @@ public class Square {
      * @param row the row the square is in
      * @param col the column the square is in
      */
-    public Square(int row, int col) {
+    public Square(int row, int col,Image imageX, Image imageO) {
         this.row = row;
         this.col = col;
 
         this.marker = TicTacToe.BLANK;
         this.isWinningSquare = false;
+        this.imageX = imageX;
+        this.imageO = imageO;
+
+
     }
 
     /******************** Getters and Setters ********************/
@@ -65,11 +75,46 @@ public class Square {
     }
     public void draw(Graphics g)
     {
+        if(isWinningSquare)
+        {
+            Font wrtng1 = new Font("Times New Roman", Font.BOLD, 75);
+            g.setColor(Color.green);
+            g.fillRect(100 + 125 * col,150 + 125 * row, sWidth,sLength);
+
+            if(marker.equals("X"))
+            {
+                g.setColor(Color.BLACK);
+                g.setFont(wrtng1);
+                g.drawString("X Wins!",150,600);
+            }
+            else if(marker.equals("O"))
+            {
+                g.setColor(Color.BLACK);
+                g.setFont(wrtng1);
+                g.drawString("O Wins!",150,600);
+            }
+        }
         //view
         //x image
         //O image
         //(x,y)
-        g.setColor(Color.RED);
-        g.fillRect(5,100,10,10);
+
+        g.setColor(Color.BLACK);
+        g.drawRect(100 + 125 * row,150 + 125 * col, sWidth,sLength);
+
+        if(marker.equals("X"))
+        {
+           g.drawImage(imageX, 100 + 125 * col,150 + 125 * row, 125, 125, null);
+
+
+        }
+        else if(marker.equals("O"))
+        {
+            g.drawImage(imageO, 100 + 125 * col,150 + 125 * row, 125, 125, null);
+        }
+
+
+
     }
+
 }

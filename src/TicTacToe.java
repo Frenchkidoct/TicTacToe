@@ -10,6 +10,8 @@
  * @version: Jan 2023
  */
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 public class TicTacToe
@@ -35,6 +37,8 @@ public class TicTacToe
 
     private Square[][] board;
     private boolean isGameOver;
+    private Image imageX;
+    private Image imageO;
 
     /**
      * Constructor which initialized the board with BLANKs.
@@ -44,10 +48,12 @@ public class TicTacToe
      */
     public TicTacToe() {
         // Initialize Squares in the board
+        imageX = new ImageIcon("Resources/X.png").getImage();
+        imageO = new ImageIcon("Resources/O.png").getImage();
         this.board = new Square[3][3];
         for(int row = 0; row < this.board.length; row++) {
             for(int col = 0; col< this.board[row].length; col++) {
-                this.board[row][col] = new Square(row, col);
+                this.board[row][col] = new Square(row, col, imageX, imageO);
             }
         }
 
@@ -110,8 +116,11 @@ public class TicTacToe
         this.window = new TicTacToeViewer(board);
 
 
+
+
         // Loop until there is a winner or no more turns
-        while(!this.checkWin() && this.checkTurn()) {
+        while(!this.checkWin() && this.checkTurn())
+        {
             this.printBoard();
             System.out.println("Enter your Row Pick:" );
             int row = input.nextInt();
@@ -122,12 +131,15 @@ public class TicTacToe
             } else {
                 System.out.println("That space is taken, or you entered an invalid row/col");
             }
+            window.repaint();
         }
+
 
         this.printBoard();
         this.isGameOver = true;
 
         // Determine if there was a winner
+
         if(!this.checkWin()) {
             System.out.println("Game ends in a tie!");
         } else {
@@ -135,11 +147,14 @@ public class TicTacToe
             if (this.turn%2 == 0) {
                 this.winner = O_MARKER;
                 System.out.println("O Wins!");
+
             } else {
                 this.winner = X_MARKER;
                 System.out.println("X Wins!");
             }
         }
+        window.repaint();
+
     }
 
 
@@ -278,6 +293,7 @@ public class TicTacToe
             System.out.print(row + " ");
             for(Square item : array) {
                 System.out.print(item + " ");
+
 
             }
             row++;

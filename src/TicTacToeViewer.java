@@ -16,22 +16,42 @@ public class TicTacToeViewer extends JFrame{
     {
         imageX = new ImageIcon("Resources/X.png").getImage();
         imageO = new ImageIcon("Resources/O.png").getImage();
+
         this.board = board;
         this.setTitle("TICTACTOE!");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(MAX_WINDOWWIDTH, MAX_WINDOWHEIGHT);
         this.setVisible(true);
     }
+    public Image getImageO()
+    {
+        return imageO;
+    }
 
-    public void paint(Graphics g) {
+    public Image getImageX()
+    {
+        return imageX;
+    }
+
+    public void paint(Graphics g)
+    {
+
+        Font wrtng = new Font("Times New Roman", Font.ITALIC, 75);
         for (int i = 0; i < board.length; i++)
         {
             for (int j = 0; j < board[i].length; j++)
             {
                 board[i][j].draw(g);
-                //if win draw square as green
-
             }
         }
+        g.setFont(wrtng);
+        g.setColor(Color.RED);
+        g.drawString("0", 140, 125);
+        g.drawString("1", 270, 125);
+        g.drawString("2", 400, 125);
+        g.drawString("0", 50, 245);
+        g.drawString("1", 50, 360);
+        g.drawString("2", 50, 475);
+
     }
 }
